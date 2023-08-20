@@ -11,16 +11,17 @@ $title = "JUAN'S AUTO PAINT";
 @endsection
 
 @section('content')
-    <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+    <div class="flex flex-wrap">
         <!-- Table -->
-        <div class=" col-span-3">
-            <table class=w-full">
-                <thead>
+        <div class="w-full md:w-3/4 p-4">
+            <h2 class="text-lg font-semibold">Paint Jobs in Progress</h2>
+            <table class="w-full">
+                <thead class="text-xs text-gray-700 uppercase bg-gray-300">
                 <tr>
-                    <th class="py-2 px-4 bg-gray-100">Paint No.</th>
-                    <th class="py-2 px-4 bg-gray-100">Current Color</th>
-                    <th class="py-2 px-4 bg-gray-100">Target Color</th>
-                    <th class="py-2 px-4 bg-gray-100">Action</th>
+                    <th class="py-2 px-4">Paint No.</th>
+                    <th class="py-2 px-4">Current Color</th>
+                    <th class="py-2 px-4">Target Color</th>
+                    <th class="py-2 px-4">Action</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -38,8 +39,8 @@ $title = "JUAN'S AUTO PAINT";
             </table>
         </div>
         <!-- Card -->
-        <div class="bg-white shadow-md col-span-1">
-            <h2 class="text-lg p-3 bg-red-300 font-bold text-white uppercase mb-1">Shop Performance</h2>
+        <div class="w-full md:w-1/4 bg-white shadow-md">
+            <h2 class="text-lg p-3 bg-red-400 font-bold text-white uppercase mb-1">Shop Performance</h2>
             <div class="p-3 ">
                 <p class="mb-2 font-semibold flex justify-between">Total Cars Painted:
                     <span class="font-semibold">150</span>
@@ -61,6 +62,33 @@ $title = "JUAN'S AUTO PAINT";
                 </ul>
             </div>
         </div>
+        <div class="w-full md:w-3/4 p-4">
+            <h2 class="text-lg font-semibold">Paint Queues</h2>
+            <table class="w-full">
+                <thead class="text-xs text-gray-700 uppercase bg-gray-300">
+                <tr>
+                    <th class="py-2 px-4">Paint No.</th>
+                    <th class="py-2 px-4">Current Color</th>
+                    <th class="py-2 px-4">Target Color</th>
+                    <th class="py-2 px-4">Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td class="py-2 px-4">1</td>
+                    <td class="py-2 px-4">Red</td>
+                    <td class="py-2 px-4">Blue</td>
+                    <td class="py-2 px-4">
+                        <button class="text-blue-500 hover:text-blue-700">Edit</button>
+                        <button class="text-red-500 hover:text-red-700">Delete</button>
+                    </td>
+                </tr>
+                <!-- Add more rows as needed -->
+                </tbody>
+            </table>
+        </div>
     </div>
+
+
 
 @endsection
