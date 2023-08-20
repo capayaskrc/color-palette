@@ -13,7 +13,8 @@ $title = "JUAN'S AUTO PAINT";
 @section('content')
     <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
         <!-- Table -->
-            <table class="w-full col-span-3">
+        <div class=" col-span-3">
+            <table class=w-full">
                 <thead>
                 <tr>
                     <th class="py-2 px-4 bg-gray-100">Paint No.</th>
@@ -35,10 +36,31 @@ $title = "JUAN'S AUTO PAINT";
                 <!-- Add more rows as needed -->
                 </tbody>
             </table>
-
+        </div>
         <!-- Card -->
-        <div class="bg-white p-6 shadow-md col-span-1">
-            <!-- Card content -->
+        <div class="bg-white shadow-md col-span-1">
+            <h2 class="text-lg p-3 bg-red-300 font-bold text-white uppercase mb-1">Shop Performance</h2>
+            <div class="p-3 ">
+                <p class="mb-2 font-semibold flex justify-between">Total Cars Painted:
+                    <span class="font-semibold">150</span>
+                </p>
+                <p class="mb-2 font-semibold">Breakdown:</p>
+                <ul class="list-none ml-6 mb-4 font-semibold ">
+                    <li class="flex justify-between items-center">
+                        <span class="mr-2">Red:</span>
+                        <span>40</span>
+                    </li>
+                    <li class="flex justify-between items-center">
+                        <span class="mr-2">Blue:</span>
+                        <span>35</span>
+                    </li>
+                    <li class="flex justify-between items-center">
+                        <span class="mr-2">Green:</span>
+                        <span>45</span>
+                    </li>
+                </ul>
+            </div>
         </div>
     </div>
+
 @endsection

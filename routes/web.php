@@ -14,5 +14,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
-});
+    return view('dashboard');
+})->name('dashboard');
+
+Route::get('/manage-cars', function () {
+    return view('manage_cars');
+})->name('manage_cars');
