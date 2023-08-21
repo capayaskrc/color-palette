@@ -6,17 +6,17 @@ $title = "JUAN'S AUTO PAINT";
 
 @section('header')
     <div class="flex justify-center">
-        <h1 class="font-bold text-6xl text-gray-800  leading-tight w-auto">{{ __($title) }}</h1>
+        <h1 class="font-bold text-5xl text-gray-800  leading-tight w-auto">{{ __($title) }}</h1>
     </div>
 @endsection
 @section('content')
     <div>
-        <h5 class="flex mb-10 text-sm font-bold tracking-wide justify-center text-gray-900 uppercase lg:text-xs">New Paint Job</h5>
+        <h2 class="flex pb-9 mb-0.5 text-2xl font-bold tracking-wide justify-center text-gray-900 uppercase ">New Paint Job</h2>
     </div>
 
 
-    <div class="pb-5">
-        <div class="flex justify-center items-center">
+    <div class="">
+        <div class="flex justify-center items-center mb-12">
             <div>
                 <img id="current-car" src="{{ asset('img/gray_car.png') }}" alt="Current Car">
             </div>
@@ -37,7 +37,7 @@ $title = "JUAN'S AUTO PAINT";
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-6">
-                <h4>Car Details</h4>
+                <h4 class="font-bold text-base">Car Details</h4>
                 <form action="submit.php" method="post">
                     <div class="form-group row">
                         <label for="name" class="col-sm-4 col-form-label">Plate No.</label>

@@ -24,7 +24,7 @@
         <div class="min-h-screen bg-gray-100">
             <!-- Page Heading -->
             <header>
-                <div class="max-w-6xl mx-auto py-16 px-4 sm:px-6 lg:px-8">
+                <div class="max-w-3xl mx-auto pb-14 pt-16 px-4 sm:px-6 lg:px-8">
                     @yield('header')
                 </div>
             </header>

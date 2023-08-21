@@ -6,7 +6,7 @@ $title = "JUAN'S AUTO PAINT";
 
 @section('header')
     <div class="flex justify-center">
-        <h1 class="font-bold text-6xl text-gray-800 content-center leading-tight w-auto">{{ __($title) }}</h1>
+        <h1 class="font-bold text-5xl text-gray-800 content-center leading-tight w-auto">{{ __($title) }}</h1>
     </div>
 @endsection
 
