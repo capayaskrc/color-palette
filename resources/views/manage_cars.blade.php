@@ -13,7 +13,7 @@ $title = "JUAN'S AUTO PAINT";
 @section('content')
     <div class="flex flex-wrap">
         <!-- Table -->
-        <div class="w-full md:w-3/4 p-4">
+        <div class="w-full md:w-3/4 py-4 pr-4">
             <h2 class="text-lg font-semibold">Paint Jobs in Progress</h2>
             <table class="w-full">
                 <thead class="text-xs text-gray-700 uppercase bg-gray-300">
@@ -62,7 +62,7 @@ $title = "JUAN'S AUTO PAINT";
                 </ul>
             </div>
         </div>
-        <div class="w-full md:w-3/4 p-4">
+        <div class="w-full md:w-3/4 py-4 pr-4">
             <h2 class="text-lg font-semibold">Paint Queues</h2>
             <table class="w-full border-gray-400">
                 <thead class="text-xs text-gray-700 uppercase bg-gray-300">
