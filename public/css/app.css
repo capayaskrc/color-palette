@@ -627,8 +627,6 @@ video {
   padding-bottom: 2rem;
 }.pb-14 {
   padding-bottom: 3.5rem;
-}.pb-5 {
-  padding-bottom: 1.25rem;
 }.pb-9 {
   padding-bottom: 2.25rem;
 }.pt-16 {
@@ -903,6 +901,9 @@ video {
     justify-content: center;
   }.sm\:justify-between {
     justify-content: space-between;
+  }.sm\:px-4 {
+    padding-left: 1rem;
+    padding-right: 1rem;
   }.sm\:px-6 {
     padding-left: 1.5rem;
     padding-right: 1.5rem;
