@@ -64,7 +64,7 @@ $title = "JUAN'S AUTO PAINT";
         </div>
         <div class="w-full md:w-3/4 p-4">
             <h2 class="text-lg font-semibold">Paint Queues</h2>
-            <table class="w-full">
+            <table class="w-full border-gray-400">
                 <thead class="text-xs text-gray-700 uppercase bg-gray-300">
                 <tr>
                     <th class="py-2 px-4">Paint No.</th>
