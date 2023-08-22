@@ -6,34 +6,10 @@ $title = "JUAN'S AUTO PAINT";
 
 @section('header')
     <div class="flex justify-center">
-        <h1 class="font-bold text-5xl text-gray-800  leading-tight w-auto">{{ __($title) }}</h1>
+        <h1 class="font-bold  text-5xl text-[#656565]  leading-tight w-auto">{{ __($title) }}</h1>
     </div>
 @endsection
 @section('content')
-    <style>
-
-        .custom-select::after {
-            content: "▼";
-            position: absolute;
-            right: 0.75rem;
-            top: 50%;
-            transform: translateY(-50%);
-            pointer-events: none;
-        }
-        .custom-select::-ms-expand {
-            display: none;
-        }
-
-        .select-arrow {
-            content: "▼";
-            width: 0;
-            height: 0;
-            border-left: 6px solid transparent;
-            border-right: 6px solid transparent;
-            border-top: 6px solid #333; /* Adjust color as needed */
-        }
-    </style>
-
     <div>
         <h2 class="flex pb-9 mb-0.5 text-2xl font-bold tracking-wide justify-center text-gray-900 uppercase ">New Paint Job</h2>
     </div>
@@ -63,23 +39,21 @@ $title = "JUAN'S AUTO PAINT";
                 </div>
                 <div class="flex justify-between items-center">
                     <label for="current-color">Current Color</label>
-                    <select class="form-control border border-gray-500 w-3/5 appearance-none custom-select" id="current-color" name="current-color">
+                    <select class="form-control border border-gray-500 w-3/5  custom-select" id="current-color" name="current-color">
                         <option value="Gray"></option>
                         <option value="Red">Red</option>
                         <option value="Blue">Blue</option>
                         <option value="Green">Green</option>
                     </select>
-{{--                    <div class="select-arrow"></div>--}}
                 </div>
                 <div class="flex justify-between items-center">
                     <label for="target-color">Target</label>
-                    <select class="form-control border border-gray-500 w-3/5 appearance-none custom-select" id="target-color" name="target-color">
+                    <select class="form-control border border-gray-500 w-3/5 custom-select" id="target-color" name="target-color">
                         <option value="Gray"></option>
                         <option value="Red">Red</option>
                         <option value="Blue">Blue</option>
                         <option value="Green">Green</option>
                     </select>
-                    <div class="select-arrow absolute right-3 top-1/2 transform -translate-y-1/2"></div>
                 </div>
                 <div class="pt-3.5 flex">
                     <button type="submit" class="w-36 h-10 bg-[#ea6a5b] font-bold text-sm text-white rounded-0">
