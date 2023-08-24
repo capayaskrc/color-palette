@@ -16,7 +16,7 @@ $title = "JUAN'S AUTO PAINT";
     </div>
     <div>
     <div class="flex flex-wrap items-stretch justify-between">
-        <div class="w-full md:w-2/3 pr-4">
+        <div class="w-full md:w-2/3 pr-4 h-80">
             <div>
                 <h2 class="text-lg font-semibold">Paint Jobs in Progress</h2>
             </div>
@@ -31,51 +31,7 @@ $title = "JUAN'S AUTO PAINT";
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td class="py-2 px-4 border">1</td>
-                        <td class="py-2 px-4 border">Red</td>
-                        <td class="py-2 px-4 border">Blue</td>
-                        <td class="py-2 px-4 border">
-                            <button class="text-blue-500 hover:text-blue-700">Edit</button>
-                            <button class="text-red-500 hover:text-red-700">Delete</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="py-2 px-4 border">1</td>
-                        <td class="py-2 px-4 border">Red</td>
-                        <td class="py-2 px-4 border">Blue</td>
-                        <td class="py-2 px-4 border">
-                            <button class="text-blue-500 hover:text-blue-700">Edit</button>
-                            <button class="text-red-500 hover:text-red-700">Delete</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="py-2 px-4 border">1</td>
-                        <td class="py-2 px-4 border">Red</td>
-                        <td class="py-2 px-4 border">Blue</td>
-                        <td class="py-2 px-4 border">
-                            <button class="text-blue-500 hover:text-blue-700">Edit</button>
-                            <button class="text-red-500 hover:text-red-700">Delete</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="py-2 px-4 border">1</td>
-                        <td class="py-2 px-4 border">Red</td>
-                        <td class="py-2 px-4 border">Blue</td>
-                        <td class="py-2 px-4 border">
-                            <button class="text-blue-500 hover:text-blue-700">Edit</button>
-                            <button class="text-red-500 hover:text-red-700">Delete</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="py-2 px-4 border">1</td>
-                        <td class="py-2 px-4 border">Red</td>
-                        <td class="py-2 px-4 border">Blue</td>
-                        <td class="py-2 px-4 border">
-                            <button class="text-blue-500 hover:text-blue-700">Edit</button>
-                            <button class="text-red-500 hover:text-red-700">Delete</button>
-                        </td>
-                    </tr>
+
                     </tbody>
                 </table>
             </div>
@@ -91,15 +47,15 @@ $title = "JUAN'S AUTO PAINT";
                         <ul class="list-none ml-4 mx-2 font-semibold ">
                             <li class="flex justify-between items-center">
                                 <span>Red:</span>
-                                <span>40</span>
+{{--                                <span>{{ $redCount }}</span>--}}
                             </li>
                             <li class="flex justify-between items-center">
                                 <span>Blue:</span>
-                                <span>35</span>
+{{--                                <span>{{ $blueCount }}</span>--}}
                             </li>
                             <li class="flex justify-between items-center">
-                                <span>Green:</span>
-                                <span>45</span>
+                                <span>Blue:</span>
+{{--                                <span>{{ $blueCount }}</span>--}}
                             </li>
                         </ul>
                  </div>
@@ -107,7 +63,7 @@ $title = "JUAN'S AUTO PAINT";
         </div>
     </div>
 
-    <div class="w-full md:w-2/3 py-4 pr-4 ab overflow-y-auto">
+    <div class="sticky w-full md:w-2/3 py-4 pr-4 ab overflow-y-auto">
             <h2 class="text-lg font-semibold">Paint Queues</h2>
             <div class="overflow-auto">
                 <table class="w-full border-collapse border">

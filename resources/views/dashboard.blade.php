@@ -35,11 +35,11 @@ $title = "JUAN'S AUTO PAINT";
             <div class="flex flex-col space-y-1">
                 <div class="flex justify-between items-center">
                     <label for="name">Plate No.</label>
-                    <input type="text" class="form-control border border-gray-500 w-3/5" id="name" name="name" required>
+                    <input type="text" class="form-control px-1 border border-gray-500 w-3/5" id="plate-no" name="plate-no" placeholder="ABC123" required>
                 </div>
                 <div class="flex justify-between items-center">
                     <label for="current-color">Current Color</label>
-                    <select class="form-control border border-gray-500 w-3/5  custom-select" id="current-color" name="current-color">
+                    <select class="form-control px-1 border border-gray-500 w-3/5  custom-select" id="current-color" name="current-color">
                         <option value="Gray"></option>
                         <option value="Red">Red</option>
                         <option value="Blue">Blue</option>
@@ -48,7 +48,7 @@ $title = "JUAN'S AUTO PAINT";
                 </div>
                 <div class="flex justify-between items-center">
                     <label for="target-color">Target</label>
-                    <select class="form-control border border-gray-500 w-3/5 custom-select" id="target-color" name="target-color">
+                    <select class="form-control px-1 border border-gray-500 w-3/5 custom-select" id="target-color" name="target-color">
                         <option value="Gray"></option>
                         <option value="Red">Red</option>
                         <option value="Blue">Blue</option>
@@ -64,6 +64,33 @@ $title = "JUAN'S AUTO PAINT";
             </div>
         </form>
     </div>
+    <script>
+        const currentCarImage = document.getElementById('current-car');
+        const targetCarImage = document.getElementById('target-car');
+        const currentColorDropdown = document.getElementById('current-color');
+        const targetColorDropdown = document.getElementById('target-color');
+
+        const colorImageMap = {
+            'Gray': 'gray_car.png',
+            'Red': 'red_car.png',
+            'Blue': 'blue_car.png',
+            'Green': 'green_car.png',
+        };
+
+        function updateCarImages() {
+            const selectedCurrentColor = currentColorDropdown.value;
+            const selectedTargetColor = targetColorDropdown.value;
+
+            const currentCarImagePath = `{{ asset('img/') }}/${colorImageMap[selectedCurrentColor]}`;
+            const targetCarImagePath = `{{ asset('img/') }}/${colorImageMap[selectedTargetColor]}`;
+
+            currentCarImage.src = currentCarImagePath;
+            targetCarImage.src = targetCarImagePath;
+        }
+
+        currentColorDropdown.addEventListener('change', updateCarImages);
+        targetColorDropdown.addEventListener('change', updateCarImages);
+    </script>
 
 
 @endsection
