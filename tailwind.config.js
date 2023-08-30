@@ -10,9 +10,8 @@ module.exports = {
     theme: {
         extend: {
             fontFamily: {
-                sans: ['Museo Sans','sans-serif'],
+                sans: ['Ariel', ...defaultTheme.fontFamily.sans],
             },
         },
     },
-
 };
