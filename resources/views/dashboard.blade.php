@@ -75,10 +75,16 @@
                   </button>
                   <div class="p-12">
                       <h2 class="text-xl font-700 mb-16">Add New Template</h2>
-                      <input type="text" x-model="templateName" name="template_name" placeholder="Enter template name" class="border border-gray-300 font-500 px-3 py-2 rounded-md w-full mb-4">
+                      <input
+                          type="text"
+                          x-model="templateName"
+                          name="template_name"
+                          placeholder="Enter template name"
+                          class="border border-gray-300 font-500 px-3 py-2 rounded-md w-full mb-4"
+                      >
                       <hr class="border-gray-300 mb-4"> <!-- Horizontal Line -->
                       <div class="flex items-center relative mb-4">
-                          <input x-model="color" type="text" placeholder="Enter color hex code" class="border border-gray-300 font-500 pr-14 px-3 py-2 rounded-md w-3/4 mr-2 h-full bg-transparent">
+                          <input x-model="color" type="text"  placeholder="Enter color hex code" class="border border-gray-300 font-500 pr-14 px-3 py-2 rounded-md w-3/4 mr-2 h-full bg-transparent">
                           <input type="color" x-model="color" class="absolute bg-white right-36 h-7 w-7 cursor-pointer border-none">
                           <button @click="addColor" class="bg-white text-black font-500 border-2 border-blue-500 py-1.5 px-6 rounded-lg whitespace-nowrap">Add Color</button>
                       </div>
@@ -96,11 +102,79 @@
 
                       <div class="mt-8 flex justify-end">
                           <button class="bg-gray-200 border border-[#dddddd] text-black px-6 py-2 rounded-lg mr-2.5" @click="hideAddTemplateModal">Back</button>
-                          <button class="border border-green-500 font-500 text-sm text-black px-6 py-2 rounded-lg" @click="saveColorPalette" >Save</button>
+                          <button
+                              class="border border-green-500 font-500 text-sm text-black px-6 py-2 rounded-lg"
+                              @click="saveClicked = true; saveColorPalette();"
+                          >
+                              Save
+                          </button>
                       </div>
                   </div>
               </div>
           </div>
+      </div>
+
+      <div x-show="showDeleteSuccessToast" x-transition id="toast-success" class=" fixed bottom-8 right-8 flex items-center w-full max-w-xs p-4 mb-4 text-gray-500 bg-white rounded-lg shadow" role="alert">
+          <div class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 text-green-500 bg-green-100 rounded-lg">
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+          </div>
+          <div class="ml-3 text-sm font-normal" x-text="deleteSuccessText"></div>
+          <button type="button" class="ml-auto -mx-1.5 -my-1.5 bg-white text-gray-400 hover:text-gray-900 rounded-lg focus:ring-2 focus:ring-gray-300 p-1.5 hover:bg-gray-100 inline-flex h-8 w-8" aria-label="Close"
+                  @click="showDeleteSuccessToast = false">
+              <span class="sr-only">Close</span>
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+          </button>
+      </div>
+      <div x-show="showDeleteOngoingToast" x-transition id="toast-simple" class="fixed bottom-8 right-8 flex items-center w-full max-w-xs p-4 mb-4 text-gray-500 bg-white rounded-lg shadow" role="alert">
+          <svg role="status" class="w-6 h-6 mr-2 text-gray-200 animate-spin fill-blue-600" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor"/>
+              <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="currentFill"/>
+          </svg>
+          <div class="pl-4 text-sm font-normal" x-text="deleteOngoingText"></div>
+      </div>
+
+      <div x-show="showDeleteFailureToast" x-transition id="toast-failure" class="fixed bottom-8 right-8 flex items-center w-full max-w-xs p-4 mb-4 text-gray-500 bg-white rounded-lg shadow" role="alert">
+          <div class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 text-orange-500 bg-orange-100 rounded-lg">
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"></path></svg>
+          </div>
+          <div class="ml-3 text-sm font-normal" x-text="deleteFailureText"></div>
+          <button type="button" class="ml-auto -mx-1.5 -my-1.5 bg-white text-gray-400 hover:text-gray-900 rounded-lg focus:ring-2 focus:ring-gray-300 p-1.5 hover:bg-gray-100 inline-flex h-8 w-8" aria-label="Close"
+                  @click="showDeleteFailureToast = false">
+              <span class="sr-only">Close</span>
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+          </button>
+      </div>
+
+      <div x-show="showSaveSuccessToast" x-transition id="toast-success" class=" fixed bottom-8 right-8 flex items-center w-full max-w-xs p-4 mb-4 text-gray-500 bg-white rounded-lg shadow" role="alert">
+          <div class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 text-green-500 bg-green-100 rounded-lg">
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+          </div>
+          <div class="ml-3 text-sm font-normal" x-text="saveSuccessText"></div>
+          <button type="button" class="ml-auto -mx-1.5 -my-1.5 bg-white text-gray-400 hover:text-gray-900 rounded-lg focus:ring-2 focus:ring-gray-300 p-1.5 hover:bg-gray-100 inline-flex h-8 w-8" aria-label="Close"
+                  @click="showSaveSuccessToast = false">
+              <span class="sr-only">Close</span>
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+          </button>
+      </div>
+
+      <div x-show="showSaveOngoingToast" x-transition id="toast-simple" class="fixed bottom-8 right-8 flex items-center w-full max-w-xs p-4 mb-4 text-gray-500 bg-white rounded-lg shadow" role="alert">
+          <svg role="status" class="w-6 h-6 mr-2 text-gray-200 animate-spin fill-blue-600" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor"/>
+              <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="currentFill"/>
+          </svg>
+          <div class="pl-4 text-sm font-normal" x-text="saveOngoingText"></div>
+      </div>
+
+      <div x-show="showSaveFailureToast" x-transition id="toast-failure" class="fixed bottom-8 right-8 flex items-center w-full max-w-xs p-4 mb-4 text-gray-500 bg-white rounded-lg shadow" role="alert">
+          <div class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 text-orange-500 bg-orange-100 rounded-lg">
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"></path></svg>
+          </div>
+          <div class="ml-3 text-sm font-normal" x-text="saveFailureText"></div>
+          <button type="button" class="ml-auto -mx-1.5 -my-1.5 bg-white text-gray-400 hover:text-gray-900 rounded-lg focus:ring-2 focus:ring-gray-300 p-1.5 hover:bg-gray-100 inline-flex h-8 w-8" aria-label="Close"
+                  @click="showSaveFailureToast = false">
+              <span class="sr-only">Close</span>
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+          </button>
       </div>
   </div>
     <script>
@@ -110,19 +184,42 @@
                 showAddTemplateModal: false,
                 templateName: '',
                 color: '',
+
                 colors: [],
                 colorTemplates: [],
                 selectedColors: [],
                 selectedTemplateId: null,
 
+                showDeleteSuccessToast: false,
+                deleteSuccessText: '',
+                showDeleteOngoingToast: false,
+                deleteOngoingText: '',
+                showDeleteFailureToast: false,
+                deleteFailureText: '',
+
+                showSaveSuccessToast: false,
+                saveSuccessText: '',
+                showSaveOngoingToast: false,
+                saveOngoingText: '',
+                showSaveFailureToast: false,
+                saveFailureText: '',
+
                 addColor() {
-                    this.colors.push(this.color);
-                    this.color = '';
+                    if (this.color !== '' ) {
+                        this.colors.push(this.color);
+                        this.color = '';
+                    }
                 },
 
                 async init() {
                     let response = await fetch(`{!! route('view_dashboard') !!}`);
                     this.colorTemplates = await response.json();
+                    const selectedTemplate = this.colorTemplates.find(template => template.is_selected);
+                    if (selectedTemplate) {
+                        this.selectedColors = selectedTemplate.colors;
+                        this.selectedTemplateId = selectedTemplate.id
+
+                    }
                 },
 
                 saveColorPalette() {
@@ -141,21 +238,18 @@
                         .then(data => {
                             console.log('Saved successfully:', data);
                             this.hideAddTemplateModal();
-
-                            // Fetch the updated list of color templates from the server
-                            fetch(`{!! route('view_dashboard') !!}`)
-                                .then(response => response.json())
-                                .then(updatedTemplates => {
-                                    // Update the colorTemplates data with the new data
-                                    this.colorTemplates = updatedTemplates;
-                                })
-                                .catch(error => {
-                                    console.error('Error fetching updated templates:', error);
-                                });
+                            this.colorTemplates = data;
+                            this.showSaveSuccessToast = true;
+                            this.saveSuccessText = 'Template successfully added.';
+                            this.templateName= '';
                         })
                         .catch(error => {
-                            console.error('Error saving:', error);
-                        });
+                            this.showSaveFailureToast = true;
+                            this.saveFailureText= 'Operation failed. Please try again later, or consult with the dev team.';
+                        }).finally(() => {
+                        this.showSaveOngoingToast = false;
+                        this.saveOngoingText = "";
+                    });
                 },
 
                 deleteTemplate(templateId) {
@@ -167,12 +261,64 @@
                         })
                             .then(response => response.json())
                             .then(data => {
-                                console.log(data.message);
                                 this.colorTemplates = this.colorTemplates.filter(template => template.id !== templateId);
+                                this.showDeleteSuccessToast = true;
+                                this.deleteSuccessText = 'Template successfully removed.';
                             })
                             .catch(error => {
+                                this.showDeleteFailureToast = true;
+                                this.deleteFailureText= 'Operation failed. Please try again later, or consult with the dev team.';
                                 console.error('Error deleting template:', error);
+                            })
+                            .finally(() => {
+                                this.showDeleteOngoingToast = false;
+                                this.deleteOngoingText = "";
                             });
+                },
+
+                selectTemplate(templateId) {
+                    const previouslySelectedTemplate = this.colorTemplates.find(template => template.is_selected);
+
+                    if (previouslySelectedTemplate && previouslySelectedTemplate.id === templateId) {
+                        previouslySelectedTemplate.is_selected = false;
+                        this.updateSelectedStatus(templateId, false);
+                        this.selectedColors = [];
+                        this.selectedTemplateId = null;
+                    } else {
+                        if (previouslySelectedTemplate) {
+                            previouslySelectedTemplate.is_selected = false;
+                            this.updateSelectedStatus(previouslySelectedTemplate.id, false);
+                        }
+
+                        const selectedTemplate = this.colorTemplates.find(template => template.id === templateId);
+                        selectedTemplate.is_selected = true;
+                        this.updateSelectedStatus(templateId, true);
+
+                        this.selectedColors = selectedTemplate.colors;
+                        this.selectedTemplateId = templateId;
+                    }
+                },
+
+
+                updateSelectedStatus(templateId, isSelected) {
+                    const formData = {
+                        is_selected: isSelected,
+                    };
+
+                    fetch('{!! route('update_selected_template', ['ID']) !!}'.replace('ID', templateId), {
+                        method: 'POST',
+                        headers: {
+                            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+                        },
+                        body: JSON.stringify(formData),
+                    })
+                        .then(response => response.json())
+                        .then(data => {
+                            this.colorTemplates = data;
+                        })
+                        .catch(error => {
+                            console.error('Error updating selected status:', error);
+                        });
                 },
 
 
@@ -196,13 +342,6 @@
                     return this.isTemplateSelected(templateId) ? 'Selected' : 'Select';
                 },
 
-                selectTemplate(templateId) {
-                    const selectedTemplate = this.colorTemplates.find(template => template.id === templateId);
-                    this.selectedColors = selectedTemplate.colors;
-                    this.selectedTemplateId = templateId;
-                },
-
-
                 openAddTemplateModal() {
                     this.showAddTemplateModal = true;
                 },
@@ -210,8 +349,6 @@
                     this.showAddTemplateModal = false;
                     this.colors = [];
                 },
-
-
             }));
         });
 

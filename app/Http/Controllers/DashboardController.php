@@ -28,7 +28,8 @@ class DashboardController extends Controller
         // Save the color palette
         $color_Palette->save();
 
-        return response()->json(['message' => 'Color palette saved successfully']);
+        $updatedTemplates = Color::all();
+        return response()->json($updatedTemplates);
     }
 
     public function destroy($id)
@@ -40,5 +41,15 @@ class DashboardController extends Controller
         } else {
             return response()->json(['error' => 'Color template not found'], 404);
         }
+    }
+
+    public function select($id)
+    {
+        $colorTemplate = Color::findOrFail($id);
+        $colorTemplate->is_selected = !$colorTemplate->is_selected;
+        $colorTemplate->save();
+
+        $updatedTemplates = Color::all();
+        return response()->json($updatedTemplates);
     }
 }
