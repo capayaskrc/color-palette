@@ -10,11 +10,7 @@ module.exports = {
     theme: {
         extend: {
             fontFamily: {
-                sans: ['MuseoSans', ...defaultTheme.fontFamily.sans],
-            },
-            fontWeight: {
-                '500': '500',
-                '700': '700',
+                sans: ['Museo Sans','sans-serif'],
             },
         },
     },

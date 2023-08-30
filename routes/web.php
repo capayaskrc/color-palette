@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\CarPaintController;
+use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('dashboard');
-})->name('dashboard');
+Route::get('/', function () {return view('dashboard');});
+Route::get('/dashboard/view', [DashboardController::class, 'view'])->name('view_dashboard');
+Route::post('/dashboard/save-color-palette', [DashboardController::class, 'save'])->name('save_color_template');
+
