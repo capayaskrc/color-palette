@@ -17,9 +17,3 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('dashboard');
 })->name('dashboard');
-
-Route::get('/manage-cars', function () {
-    return view('manage_cars');
-})->name('manage_cars');
-
-Route::post('/save-paint-job', [CarPaintController::class, 'store'])->name('paint-job.store');

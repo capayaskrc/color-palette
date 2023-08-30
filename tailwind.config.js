@@ -10,7 +10,11 @@ module.exports = {
     theme: {
         extend: {
             fontFamily: {
-                sans: ['Ariel', ...defaultTheme.fontFamily.sans],
+                sans: ['MuseoSans', ...defaultTheme.fontFamily.sans],
+            },
+            fontWeight: {
+                '500': '500',
+                '700': '700',
             },
         },
     },
