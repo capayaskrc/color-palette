@@ -37,7 +37,7 @@ class DashboardController extends Controller
         $colorTemplate = Color::find($id);
         if ($colorTemplate) {
             $colorTemplate->delete();
-            return response()->json(['message' => 'Color template deleted successfully']);
+            return response()->json($colorTemplate);
         } else {
             return response()->json(['error' => 'Color template not found'], 404);
         }

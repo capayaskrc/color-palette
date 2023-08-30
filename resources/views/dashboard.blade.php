@@ -261,7 +261,11 @@
                         })
                             .then(response => response.json())
                             .then(data => {
-                                this.colorTemplates = this.colorTemplates.filter(template => template.id !== templateId);
+                                this.colorTemplates = data;
+                                if (this.selectedTemplateId === templateId) {
+                                    this.selectedColors = [];
+                                    this.selectedTemplateId = null;
+                                }
                                 this.showDeleteSuccessToast = true;
                                 this.deleteSuccessText = 'Template successfully removed.';
                             })
