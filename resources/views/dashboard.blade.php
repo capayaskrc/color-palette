@@ -311,9 +311,7 @@
                             'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
                         },
                         body: JSON.stringify(formData),
-                    })
-                        .then(response => response.json())
-                        .then(data => {
+                    }).then(response => response.json()).then(data => {
                             this.colorTemplates = data;
                         })
                         .catch(error => {
@@ -321,18 +319,15 @@
                         });
                 },
 
-
                 getColorBoxClasses(index) {
                     const isFirst = index === 0;
                     const isLast = index === this.selectedColors.length - 1;
-
                     return {
                         'rounded-l-2xl': isFirst,
                         'rounded-r-2xl': isLast,
                         '': !isFirst && !isLast,
                     };
                 },
-
 
                 isTemplateSelected(templateId) {
                     return this.selectedTemplateId === templateId;
@@ -345,13 +340,12 @@
                 openAddTemplateModal() {
                     this.showAddTemplateModal = true;
                 },
+
                 hideAddTemplateModal() {
                     this.showAddTemplateModal = false;
                     this.colors = [];
                 },
             }));
         });
-
     </script>
-
 @endsection
