@@ -11,16 +11,19 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('color_palettes', function (Blueprint $table) {
-            $table->id();
-            $table->string('template_name');
-            $table->json('colors'); // You can use 'text' if you prefer
-            $table->timestamps();
+        Schema::table('color_palettes', function (Blueprint $table) {
+            $table->boolean('is_selected')->default(false);
         });
     }
 
+
+    /**
+     * Reverse the migrations.
+     */
     public function down()
     {
-        Schema::dropIfExists('color_palettes');
+        Schema::table('color_palettes', function (Blueprint $table) {
+            $table->dropColumn('is_selected');
+        });
     }
 };
