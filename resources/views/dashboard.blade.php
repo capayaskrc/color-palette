@@ -43,7 +43,17 @@
                                   <path stroke-linecap="round" stroke-linejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
                               </svg>
                               </button>
-                              <button class="px-6 py-1 border border-blue-500 rounded-lg text-center" @click="selectTemplate(template.id)" >Select</button>
+                              <button
+                                  class=" py-2 w-32 border border-blue-500 rounded-lg text-center"
+                                  :class="{
+                                        'bg-green-500 text-white': isTemplateSelected(template.id),
+                                        'border-blue-500 text-blue-500': !isTemplateSelected(template.id)
+                                    }"
+                                  @click="selectTemplate(template.id)"
+                              >
+                                  <span x-text="getSelectButtonText(template.id)"></span>
+                              </button>
+
                           </div>
                       </li>
                   </template>
@@ -94,8 +104,7 @@
       </div>
   </div>
     <script>
-        {{--const templates = {!! json_encode($jsonData, JSON_UNESCAPED_SLASHES); !!};--}}
-        {{--console.log(templates);--}}
+
         document.addEventListener('alpine:init', () => {
             Alpine.data('colorData', () => ({
                 showAddTemplateModal: false,
@@ -104,22 +113,19 @@
                 colors: [],
                 colorTemplates: [],
                 selectedColors: [],
+                selectedTemplateId: null,
 
                 addColor() {
                     this.colors.push(this.color);
-                    this.color = ''; // Reset the color input
+                    this.color = '';
                 },
 
                 async init() {
                     let response = await fetch(`{!! route('view_dashboard') !!}`);
                     this.colorTemplates = await response.json();
-                    console.log(this.colorTemplates);
-
                 },
 
-                // Add this function in your Alpine.js script section
                 saveColorPalette() {
-                    // Prepare the data for the POST request
                     const formData = new FormData();
                     formData.append('template_name', this.templateName);
                     formData.append('colors', JSON.stringify(this.colors));
@@ -134,12 +140,41 @@
                         .then(response => response.json())
                         .then(data => {
                             console.log('Saved successfully:', data);
-                            this.hideAddTemplateModal(); // Close the modal after saving
+                            this.hideAddTemplateModal();
+
+                            // Fetch the updated list of color templates from the server
+                            fetch(`{!! route('view_dashboard') !!}`)
+                                .then(response => response.json())
+                                .then(updatedTemplates => {
+                                    // Update the colorTemplates data with the new data
+                                    this.colorTemplates = updatedTemplates;
+                                })
+                                .catch(error => {
+                                    console.error('Error fetching updated templates:', error);
+                                });
                         })
                         .catch(error => {
                             console.error('Error saving:', error);
                         });
                 },
+
+                deleteTemplate(templateId) {
+                        fetch('{!! route('delete_color_template', ['ID']) !!}'.replace('ID', templateId), {
+                            method: 'DELETE',
+                            headers: {
+                                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+                            },
+                        })
+                            .then(response => response.json())
+                            .then(data => {
+                                console.log(data.message);
+                                this.colorTemplates = this.colorTemplates.filter(template => template.id !== templateId);
+                            })
+                            .catch(error => {
+                                console.error('Error deleting template:', error);
+                            });
+                },
+
 
                 getColorBoxClasses(index) {
                     const isFirst = index === 0;
@@ -153,13 +188,20 @@
                 },
 
 
+                isTemplateSelected(templateId) {
+                    return this.selectedTemplateId === templateId;
+                },
+
+                getSelectButtonText(templateId) {
+                    return this.isTemplateSelected(templateId) ? 'Selected' : 'Select';
+                },
 
                 selectTemplate(templateId) {
                     const selectedTemplate = this.colorTemplates.find(template => template.id === templateId);
                     this.selectedColors = selectedTemplate.colors;
-
-                    console.log(this.selectedColors);
+                    this.selectedTemplateId = templateId;
                 },
+
 
                 openAddTemplateModal() {
                     this.showAddTemplateModal = true;

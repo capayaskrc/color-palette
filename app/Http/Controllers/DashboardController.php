@@ -30,4 +30,15 @@ class DashboardController extends Controller
 
         return response()->json(['message' => 'Color palette saved successfully']);
     }
+
+    public function destroy($id)
+    {
+        $colorTemplate = Color::find($id);
+        if ($colorTemplate) {
+            $colorTemplate->delete();
+            return response()->json(['message' => 'Color template deleted successfully']);
+        } else {
+            return response()->json(['error' => 'Color template not found'], 404);
+        }
+    }
 }
